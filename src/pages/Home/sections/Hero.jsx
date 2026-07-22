@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
-import spaVideo from '../../../assets/spaVideo.mp4'
+import spaVideo from '../../../assets/v1spaVideo.mp4'
 
 const Hero = () => (
   <section className="hero-section">

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Check } from 'lucide-react'
 import { packages } from '../../../data/packages'
 
 const SpaPackages = () => (
@@ -16,7 +17,15 @@ const SpaPackages = () => (
           {i === 1 && <span className="package-badge">Most Popular</span>}
           <h3>{pkg.title}</h3>
           <p className="price">{pkg.price}</p>
-          <p>{pkg.details}</p>
+          <ul className="package-includes">
+            {pkg.includes.map((item) => (
+              <li key={item}>
+                <Check size={13} strokeWidth={2.5} className="check-icon" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <Link to="/booking" className="btn-small">Book Now</Link>
         </article>
       ))}
     </div>
