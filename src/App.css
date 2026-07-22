@@ -1,5 +1,6 @@
 .page-shell {
   min-height: 100vh;
+  padding-top: 140px;
   background: linear-gradient(135deg, #f7f1e9 0%, #ffffff 100%);
   color: #2f241d;
 }
@@ -9,7 +10,7 @@
   padding: 24px 24px 56px;
   background:
     linear-gradient(90deg, rgba(24, 18, 14, 0.7) 0%, rgba(24, 18, 14, 0.2) 100%),
-    url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1600&q=80') center/cover;
+    url('') center/cover;
   color: #fffdf9;
 }
 
@@ -238,3 +239,4 @@ main {
     gap: 12px;
   }
 }
+

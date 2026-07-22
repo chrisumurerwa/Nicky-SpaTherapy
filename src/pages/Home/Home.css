@@ -6,7 +6,8 @@
 
 /* ── Hero ── */
 .hero-section {
-  height: 100vh;
+  margin-top: 140px;
+  height: calc(100vh - 140px);
   position: relative;
   color: #FCFBF8;
   display: flex;
@@ -144,7 +145,7 @@ h1, h2, h3,
 main {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px 64px;
+  padding: 40px 24px 64px;
 }
 
 .intro-section,

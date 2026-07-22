@@ -1,6 +1,7 @@
 .services-page {
   background: #f7f1e9;
   min-height: 100vh;
+  padding-top: 140px;
 }
 
 /* ── Hero ── */
@@ -8,7 +9,7 @@
   background:
     linear-gradient(160deg, rgba(18, 12, 10, 0.82) 0%, rgba(18, 12, 10, 0.45) 100%),
     url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  padding: 120px 24px 80px;
+  padding: 160px 24px 80px;
   color: #fffdf9;
   text-align: center;
 }

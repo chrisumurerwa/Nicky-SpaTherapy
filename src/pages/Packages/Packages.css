@@ -7,7 +7,7 @@
   background:
     linear-gradient(160deg, rgba(26, 26, 26, 0.85) 0%, rgba(79, 111, 82, 0.4) 100%),
     url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  padding: 120px 24px 80px;
+padding: 160px 24px 80px;
   color: #FCFBF8;
   text-align: center;
 }
