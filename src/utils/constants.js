@@ -1,0 +1,6 @@
+export const siteName = 'Nicky Spa Therapy'
+export const phone = '+250 787 326 503'
+export const email = 'umurizanickyy@gmail.com'
+export const instagram = '@Nickyspakigali'
+export const momoCode = '781132'
+export const location = 'Kigali, Rwanda'

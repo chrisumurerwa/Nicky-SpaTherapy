@@ -1,0 +1,125 @@
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 18px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #1A1A1A;
+  border-bottom: 1px solid rgba(200, 169, 106, 0.2);
+  transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.top-nav--scrolled {
+  background: #1A1A1A;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  padding: 12px 40px;
+  border-bottom: 1px solid rgba(200, 169, 106, 0.25);
+}
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.brand-mark {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+  margin: 0;
+  color: #FCFBF8;
+}
+
+.brand-tag {
+  color: #C8A96A;
+  font-size: 0.75rem;
+  letter-spacing: 0.08rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: #FCFBF8;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.03rem;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-active:not(.nav-cta) {
+  color: #C8A96A !important;
+}
+
+.nav-active:not(.nav-cta)::after {
+  width: 100% !important;
+}
+
+.nav-links a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C8A96A;
+  transition: width 0.25s ease;
+}
+
+.nav-links a:not(.nav-cta):hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, #C8A96A, #4F6F52);
+  color: #FCFBF8 !important;
+  font-weight: 700 !important;
+  padding: 9px 20px !important;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0 4px 14px rgba(200, 169, 106, 0.35);
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 111, 82, 0.4) !important;
+}
+
+.nav-cta::after { display: none !important; }
+
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle svg { display: block; color: #FCFBF8; }
+
+@media (max-width: 768px) {
+  .top-nav { flex-wrap: wrap; padding: 16px 20px; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 0 8px;
+  }
+  .nav-links--open { display: flex; }
+  .nav-cta { align-self: flex-start; }
+}
