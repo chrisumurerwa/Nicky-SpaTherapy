@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import logo from '../../assets/LogoNickySpa.jpeg'
 import './Navbar.css'
 
 const navLinks = [
@@ -28,8 +29,7 @@ const Navbar = () => {
   return (
     <nav className={`top-nav${scrolled ? ' top-nav--scrolled' : ''}`}>
       <Link to="/" className="nav-brand" onClick={closeMenu}>
-        <p className="brand-mark">Nicky Spa Therapy</p>
-        <span className="brand-tag">Luxury Wellness in Kigali</span>
+        <img src={logo} alt="Nicky Spa Therapy" className="nav-logo" />
       </Link>
 
       <button
