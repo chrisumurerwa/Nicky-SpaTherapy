@@ -1,0 +1,211 @@
+.services-page {
+  background: #f7f1e9;
+  min-height: 100vh;
+  padding-top: 140px;
+}
+
+/* ── Hero ── */
+.services-hero {
+  background:
+    linear-gradient(160deg, rgba(18, 12, 10, 0.82) 0%, rgba(18, 12, 10, 0.45) 100%),
+    url('https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  padding: 160px 24px 80px;
+  color: #fffdf9;
+  text-align: center;
+}
+
+.services-hero-inner { max-width: 600px; margin: 0 auto; }
+
+.services-hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.services-hero p { color: #c9b99e; font-size: 1.05rem; }
+
+.eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.35rem;
+  color: #d8b36d;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* ── Content wrapper ── */
+.services-content {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Category card ── */
+.service-category {
+  background: #fffdf9;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(44, 31, 20, 0.07);
+  overflow: hidden;
+  border: 1px solid #efe1ca;
+}
+
+.service-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid #f0e4cf;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.service-category-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.service-cat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(216,179,109,0.18), rgba(216,179,109,0.07));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d8b36d;
+  flex-shrink: 0;
+}
+
+.service-cat-desc {
+  color: #6b5f52;
+  font-size: 0.88rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Pricing table ── */
+.service-table-wrap {
+  overflow-x: auto;
+}
+
+.service-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.service-table thead tr {
+  background: linear-gradient(135deg, #fcf6ee, #f5ebdc);
+}
+
+.service-table th {
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  color: #8b6741;
+  white-space: nowrap;
+}
+
+.service-table th:not(:first-child) {
+  text-align: center;
+}
+
+.service-table tbody tr {
+  border-top: 1px solid #f0e4cf;
+  transition: background 0.15s ease;
+}
+
+.service-table tbody tr:hover {
+  background: #fdf8f2;
+}
+
+.treatment-name {
+  padding: 14px 20px;
+  font-weight: 500;
+  color: #2f241d;
+}
+
+.treatment-price {
+  padding: 14px 20px;
+  text-align: center;
+  font-weight: 600;
+  color: #8b6741;
+  white-space: nowrap;
+}
+
+.no-price {
+  color: #c9b99e;
+  font-weight: 400;
+}
+
+/* ── Book button ── */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d8b36d, #c59a4e);
+  color: #1f1610;
+  box-shadow: 0 6px 18px rgba(216, 179, 109, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(216, 179, 109, 0.5);
+}
+
+/* ── Bottom CTA ── */
+.services-cta {
+  text-align: center;
+  padding: 72px 24px;
+  background: linear-gradient(145deg, #2f241d, #3d2e22);
+  color: #fffdf9;
+  margin-top: 8px;
+}
+
+.services-cta h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  margin-bottom: 12px;
+}
+
+.services-cta p {
+  color: #c9b99e;
+  margin-bottom: 28px;
+  font-size: 1rem;
+}
+
+.services-cta .btn {
+  max-width: 200px;
+  display: inline-block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .service-category-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service-table th,
+  .treatment-name,
+  .treatment-price {
+    padding: 11px 14px;
+  }
+}

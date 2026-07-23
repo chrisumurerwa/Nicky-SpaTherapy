@@ -1,0 +1,11 @@
+:root {
+  /* ── Luxury Spa Palette ── */
+  --color-gold:         #C8A96A;   /* Champagne Gold  — buttons, highlights, icons */
+  --color-gold-dark:    #4F6F52;   /* Forest Green    — button hover effects */
+  --color-bg:           #F5F1EA;   /* Beige           — main page background */
+  --color-surface:      #FCFBF8;   /* Ivory White     — cards, form backgrounds */
+  --color-heading:      #1A1A1A;   /* Charcoal Black  — headings, navbar */
+  --color-text:         #6B7280;   /* Soft Gray       — body text */
+  --color-accent:       #A8B5A2;   /* Sage Green      — wellness accents */
+  --color-forest:       #4F6F52;   /* Forest Green    — hover, active states */
+}
