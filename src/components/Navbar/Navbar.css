@@ -90,6 +90,108 @@
 
 .nav-cta::after { display: none !important; }
 
+/* ── Admin Login Icon ── */
+.nav-login-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FCFBF8 !important;
+  transition: color 0.2s ease !important;
+  padding: 6px !important;
+  margin-left: 4px;
+}
+
+.nav-login-link:hover {
+  color: #C8A96A !important;
+}
+
+/* ── Admin Dropdown ── */
+.nav-admin-dropdown {
+  position: relative;
+  margin-left: 4px;
+}
+
+.nav-admin-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: #FCFBF8;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+  font-size: 0.85rem;
+}
+
+.nav-admin-trigger:hover {
+  background: rgba(200, 169, 106, 0.15);
+  color: #C8A96A;
+}
+
+.nav-admin-name {
+  font-weight: 600;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-admin-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #FCFBF8;
+  border: 1px solid #ddd8ce;
+  border-radius: 12px;
+  padding: 6px;
+  min-width: 180px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-admin-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+  text-decoration: none !important;
+  border: none !important;
+  background: none !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: background 0.15s ease !important;
+}
+
+.nav-admin-item:hover {
+  background: #F5F1EA !important;
+  color: #C8A96A !important;
+}
+
+.nav-admin-item::after {
+  display: none !important;
+}
+
+.nav-admin-item--logout {
+  color: #c62828 !important;
+  border-top: 1px solid #f0ebe2 !important;
+  margin-top: 2px;
+  padding-top: 12px !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+.nav-admin-item--logout:hover {
+  background: #fce4ec !important;
+  color: #c62828 !important;
+}
+
 /* Hamburger */
 .nav-toggle {
   display: none;

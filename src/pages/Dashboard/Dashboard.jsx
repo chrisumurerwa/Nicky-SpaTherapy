@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Trash2, RefreshCw, MessageCircle, Calendar, Users, Clock } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Trash2, RefreshCw, MessageCircle, Calendar, Users, Clock, AlertTriangle } from 'lucide-react'
+import { useAuth } from '../../context/AuthContext'
 import './Dashboard.css'
+
+const API_URL = '/api'
 
 const WHATSAPP_NUMBER = '250787326503'
 
@@ -26,28 +30,101 @@ const Dashboard = () => {
   const [bookings, setBookings] = useState([])
   const [filter, setFilter]     = useState('All')
   const [search, setSearch]     = useState('')
+  const [loading, setLoading]   = useState(true)
+  const [error, setError]       = useState('')
 
-  const load = () => setBookings(JSON.parse(localStorage.getItem('nicky_bookings') || '[]'))
+  const { token } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  useEffect(() => { load() }, [])
+  // Sync filter from URL query params
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const filterParam = params.get('filter')
+    if (filterParam && ['Pending', 'Confirmed', 'Completed', 'Cancelled'].includes(filterParam)) {
+      setFilter(filterParam)
+    } else {
+      setFilter('All')
+    }
+  }, [location.search])
 
-  const updateStatus = (id, status) => {
-    const updated = bookings.map(b => b.id === id ? { ...b, status } : b)
-    setBookings(updated)
-    localStorage.setItem('nicky_bookings', JSON.stringify(updated))
+  const authHeaders = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
   }
 
-  const deleteBooking = (id) => {
+  const loadBookings = async () => {
+    if (!token) {
+      navigate('/login', { replace: true })
+      return
+    }
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch(`${API_URL}/bookings`, { headers: authHeaders })
+      if (!res.ok) {
+        if (res.status === 401) {
+          navigate('/login', { replace: true })
+          return
+        }
+        throw new Error('Failed to fetch bookings')
+      }
+      const data = await res.json()
+      setBookings(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (token) {
+      loadBookings()
+    }
+  }, [token])
+
+  const updateStatus = async (id, status) => {
+    try {
+      const res = await fetch(`${API_URL}/bookings/${id}`, {
+        method: 'PUT',
+        headers: authHeaders,
+        body: JSON.stringify({ status })
+      })
+      if (!res.ok) throw new Error('Update failed')
+      const updated = await res.json()
+      setBookings(prev => prev.map(b => b.id === updated.id ? updated : b))
+    } catch (err) {
+      setError(err.message)
+    }
+  }
+
+  const deleteBooking = async (id) => {
     if (!window.confirm('Delete this booking?')) return
-    const updated = bookings.filter(b => b.id !== id)
-    setBookings(updated)
-    localStorage.setItem('nicky_bookings', JSON.stringify(updated))
+    try {
+      const res = await fetch(`${API_URL}/bookings/${id}`, {
+        method: 'DELETE',
+        headers: authHeaders
+      })
+      if (!res.ok) throw new Error('Delete failed')
+      setBookings(prev => prev.filter(b => b.id !== id))
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
-  const clearAll = () => {
+  const clearAll = async () => {
     if (!window.confirm('Clear ALL bookings? This cannot be undone.')) return
-    localStorage.removeItem('nicky_bookings')
-    setBookings([])
+    try {
+      const res = await fetch(`${API_URL}/bookings`, {
+        method: 'DELETE',
+        headers: authHeaders
+      })
+      if (!res.ok) throw new Error('Clear failed')
+      setBookings([])
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   const filtered = bookings.filter(b => {
@@ -68,21 +145,30 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-
-      <div className="dash-header">
-        <div>
-          <h1>Bookings Dashboard</h1>
-          <p>Nicky Spa Therapy — Manage all appointments</p>
+      <div className="dash-toolbar">
+        <div className="dash-toolbar-left">
+          <div className="dash-filters">
+            {['All', 'Pending', 'Confirmed', 'Completed', 'Cancelled'].map(s => (
+              <button key={s} className={`filter-btn${filter === s ? ' filter-btn--active' : ''}`} onClick={() => setFilter(s)}>{s}</button>
+            ))}
+          </div>
         </div>
-        <div className="dash-header-actions">
-          <button className="dash-btn dash-btn--ghost" onClick={load}>
-            <RefreshCw size={15} /> Refresh
+        <div className="dash-toolbar-right">
+          <input className="dash-search" placeholder="Search by name, treatment, phone..." value={search} onChange={e => setSearch(e.target.value)} />
+          <button className="dash-btn dash-btn--ghost" onClick={loadBookings} disabled={loading} title="Refresh">
+            <RefreshCw size={15} className={loading ? 'dash-spin' : ''} />
           </button>
-          <button className="dash-btn dash-btn--danger" onClick={clearAll}>
-            <Trash2 size={15} /> Clear All
+          <button className="dash-btn dash-btn--danger" onClick={clearAll} title="Clear all bookings">
+            <Trash2 size={15} />
           </button>
         </div>
       </div>
+
+      {error && (
+        <div className="dash-error">
+          <AlertTriangle size={16} /> {error}
+        </div>
+      )}
 
       <div className="dash-stats">
         <div className="stat-card"><Users size={22} color="#C8A96A" /><div><p className="stat-num">{counts.total}</p><p className="stat-label">Total Bookings</p></div></div>
@@ -91,16 +177,12 @@ const Dashboard = () => {
         <div className="stat-card"><Calendar size={22} color="#3b82f6" /><div><p className="stat-num">{counts.today}</p><p className="stat-label">Today</p></div></div>
       </div>
 
-      <div className="dash-toolbar">
-        <div className="dash-filters">
-          {['All', 'Pending', 'Confirmed', 'Completed', 'Cancelled'].map(s => (
-            <button key={s} className={`filter-btn${filter === s ? ' filter-btn--active' : ''}`} onClick={() => setFilter(s)}>{s}</button>
-          ))}
+      {loading ? (
+        <div className="dash-empty">
+          <div className="dash-loader"></div>
+          <p>Loading bookings...</p>
         </div>
-        <input className="dash-search" placeholder="Search by name, treatment, phone..." value={search} onChange={e => setSearch(e.target.value)} />
-      </div>
-
-      {filtered.length === 0 ? (
+      ) : filtered.length === 0 ? (
         <div className="dash-empty">
           <p>🌿 No bookings found.</p>
           <p>Bookings submitted through the booking form will appear here.</p>
@@ -171,3 +253,4 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+

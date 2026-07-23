@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 import MainLayout from '../layouts/MainLayout'
+import AdminLayout from '../layouts/AdminLayout'
+import ProtectedRoute from '../components/ProtectedRoute'
 import Home from '../pages/Home/Home'
 import About from '../pages/About/About'
 import Services from '../pages/Services/Services'
@@ -8,6 +10,7 @@ import Packages from '../pages/Packages/Packages'
 import Gallery from '../pages/Gallery/Gallery'
 import Booking from '../pages/Booking/Booking'
 import Contact from '../pages/Contact/Contact'
+import Login from '../pages/Login/Login'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import NotFound from '../pages/NotFound/NotFound'
 
@@ -23,7 +26,14 @@ const AppRoutes = () => {
         <Route path="/gallery" element={<MainLayout><Gallery /></MainLayout>} />
         <Route path="/booking" element={<MainLayout><Booking /></MainLayout>} />
         <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
-        <Route path="/dashboard" element={<MainLayout><Dashboard /></MainLayout>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }>
+          <Route index element={<Dashboard />} />
+        </Route>
         <Route path="*" element={<MainLayout><NotFound /></MainLayout>} />
       </Routes>
     </BrowserRouter>
@@ -31,3 +41,4 @@ const AppRoutes = () => {
 }
 
 export default AppRoutes
+
