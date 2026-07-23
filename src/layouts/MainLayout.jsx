@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat/WhatsAppFloat'
+import BackToTop from '../components/BackToTop/BackToTop'
 import '../components/Navbar/Navbar.css'
 import '../components/Footer/Footer.css'
 
@@ -11,6 +12,7 @@ const MainLayout = ({ children }) => (
     </div>
     {children}
     <Footer />
+    <BackToTop />
     <WhatsAppFloat />
   </div>
 )
