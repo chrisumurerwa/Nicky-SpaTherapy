@@ -122,9 +122,18 @@ const Navbar = () => {
         className={`top-nav${scrolled ? ' top-nav--scrolled' : ''}`}
         aria-label="Main navigation"
       >
+        {/* Center diamond accent */}
+        <span className="nav-center-diamond" />
+        {/* Scattered shimmer dots along bottom */}
+        <span className="nav-bottom-dot nav-bottom-dot--1" />
+        <span className="nav-bottom-dot nav-bottom-dot--2" />
+        <span className="nav-bottom-dot nav-bottom-dot--3" />
+        <span className="nav-bottom-dot nav-bottom-dot--4" />
+        <span className="nav-bottom-dot nav-bottom-dot--5" />
+        <span className="nav-bottom-dot nav-bottom-dot--6" />
+
         <Link to="/" className="nav-brand" onClick={closeMenu}>
           <img src={logo} alt="Nicky Spa Therapy" className="nav-logo" />
-          <span className="nav-brand-text">Nicky Spa Therapy</span>
         </Link>
         <button
           type="button"
